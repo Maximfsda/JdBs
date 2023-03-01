@@ -6,6 +6,7 @@ public class Application {public static void main(String[] args) {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT * FROM employee WHERE id = 1");{
             ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()) {
                 System.out.println(
                         "id = " + resultSet.getInt("id") +"\n"+
