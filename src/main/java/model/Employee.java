@@ -16,8 +16,9 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
-    @Column(name = "city_id")
-    private Long city;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     public Employee() {
     }
@@ -29,7 +30,7 @@ public class Employee {
         this.age = age;
     }
 
-    public Employee(String name, String lastname, String gender, int age, Long city) {
+    public Employee(String name, String lastname, String gender, int age, City city) {
         this.name = name;
         this.lastname = lastname;
         this.gender = gender;
@@ -37,7 +38,7 @@ public class Employee {
         this.city = city;
     }
 
-    public Employee(long id, String name, String lastname, String gender, int age, Long city) {
+    public Employee(long id, String name, String lastname, String gender, int age, City city) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -86,11 +87,11 @@ public class Employee {
         this.age = age;
     }
 
-    public Long getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(Long city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
