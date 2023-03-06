@@ -15,11 +15,11 @@ public class Application {
         City piter = new City(2, "Санкт-ПитерБург");
         City kazan = new City(1, "Казань");
 
-        employeeDao.add(new Employee("Николай", "Иванов", "муж", 12, moscow))
-                .ifPresent(employee -> System.out.println("Добавление сотрудника: " + employee));
+        Employee nikola = employeeDao.add(new Employee("Николай", "Иванов", "муж", 12, 1L));
+                System.out.println("Добавление сотрудника: " + nikola);
 
-        employeeDao.add(new Employee("Ний", "Ивав", "муж", 19, piter))
-                .ifPresent(employee -> System.out.println("Добавление сотрудника: " + employee));
+        Employee niy = employeeDao.add(new Employee("Ний", "Ивав", "муж", 19, 2L));
+                System.out.println("Добавление сотрудника: " + niy);
 
         System.out.println("Все сотруднки:");
         employeeDao.findAll().forEach(System.out::println);
