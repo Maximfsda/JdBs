@@ -1,27 +1,39 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-public class Application {public static void main(String[] args) {
-    try (Connection connection = DriverManager.getConnection(
-            "jdbc:postgresql://localhost:5432/skypro", "postgres", "13579Tetris")) {
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT * FROM employee WHERE id = 1");{
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                System.out.println(
-                        "id = " + resultSet.getInt("id") +"\n"+
-                                "name = " + resultSet.getString("firstname")+"\n"+
-                                "lastname = " + resultSet.getString("lastname")+"\n"+
-                                "gender = " + resultSet.getString("gender")+"\n"+
-                                "age = " + resultSet.getInt("age")
+import dao.CityDao;
+import dao.EmployeeDao;
+import dao.impl.CityDaoImp;
+import dao.impl.EmployeeDaoImpl;
+import jdbc.ConnectionManager;
+import model.City;
+import model.Employee;
 
+public class Application {
+    public static void main(String[] args) {
+        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        CityDao cityDao = new CityDaoImp();
 
-                );
-
-            }
-
+        int n = 5;
+        City city = new City("Волгоград");
+        List<Employee> employees = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            employees.add(
+                    new Employee(
+                            "Имя " + (i + 1),
+                            "Фамилия " + (i + 1),
+                            "Муж ",
+                            30 + i,
+                            city)
+            );
         }
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
+        city.setEmployees(employees);
+
+        cityDao.add(city);
     }
 }
-}
+
+
+
